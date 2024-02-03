@@ -36,7 +36,7 @@ function addBook(title, price) {
      
     gBooks.unshift(
         {
-            id: 'bg4J81',
+            id: makeId(),
             title: title,
             price: price,
             imgUrl: 'lori-ipsi.jpg'
