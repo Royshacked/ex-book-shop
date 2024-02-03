@@ -15,7 +15,7 @@ function render() {
             <td>${book.title}</td>
             <td>${book.price}</td>
             <td>
-                <button class="read">Read</button>
+                <button class="read" onclick = "onReadBook('${book.id}')">Read</button>
                 <button class="update" onclick = "onUpdateBook('${book.id}')">Update</button>
                 <button class="delete" onclick = "onRemoveBook('${book.id}')">Delete</button>
             </td>
@@ -42,4 +42,18 @@ function onAddBook() {
     const price = +prompt('Please insert Book price')
     addBook(title,price) 
     render()
+}
+
+function onReadBook(bookId) {
+    const elModal = document.querySelector('.book-details')
+    const elTxt = elModal.querySelector('h2 span')
+    const elPre = elModal.querySelector('pre') 
+
+    const book = readBook(bookId)
+    const bookStr = JSON.stringify(book, null, 4)
+
+    elTxt.innerText = book.title
+    elPre.innerText = bookStr
+
+    elModal.showModal()
 }

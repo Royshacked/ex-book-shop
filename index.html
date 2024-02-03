@@ -8,10 +8,20 @@
     <link rel="stylesheet" href="css/main.css" class="css">
 </head>
 
-<body onload = "onInit()">
+<body onload="onInit()">
     <h1>The Book Shop</h1>
-    <button onclick = "onAddBook()">Add a Book</button>
+
+    <button onclick="onAddBook()">Add a Book</button>
+
     <table></table>
+
+    <dialog class="book-details">
+        <form method="dialog">
+            <h2>Book: <span></span></h2>
+            <pre></pre>
+            <button>x</button>
+        </form>
+    </dialog>
 
     <script src="js/service/bs.service.js"></script>
     <script src="js/bs.controller.js"></script>

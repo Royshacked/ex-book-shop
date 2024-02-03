@@ -32,8 +32,8 @@ function updateBook(id, price) {
 }
 
 function addBook(title, price) {
-    if(!title||!price) return 
-     
+    if (!title || !price) return
+
     gBooks.unshift(
         {
             id: makeId(),
@@ -42,4 +42,9 @@ function addBook(title, price) {
             imgUrl: 'lori-ipsi.jpg'
         }
     )
+}
+
+function readBook(id) {
+    const book = gBooks.find(book => book.id === id)
+    return book
 }
