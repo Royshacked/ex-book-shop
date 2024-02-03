@@ -32,6 +32,8 @@ function updateBook(id, price) {
 }
 
 function addBook(title, price) {
+    if(!title||!price) return 
+     
     gBooks.unshift(
         {
             id: 'bg4J81',
