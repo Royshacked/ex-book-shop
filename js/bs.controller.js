@@ -1,3 +1,5 @@
 'use strict'
 
-console.log('hi controller')
+function onInit() {
+    render()
+}

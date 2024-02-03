@@ -2,3 +2,52 @@
     box-sizing: border-box;
 }
 
+body {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    margin:100px auto;
+    text-align-last: left;  
+    width: 50vw; 
+}
+
+table, th, td {
+    border:solid lightgray 2px;
+    border-collapse: collapse;  
+    padding: 5px;
+
+    font-weight: bold;
+}
+
+th {
+    background-color: rgb(187, 183, 183);
+}
+
+/* table:nth-child(even) {
+    background-color: #ffffff7c;
+} */
+
+button  {
+    width: 100px;
+    height: 25px;
+    margin: 5px;
+    border: 0px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.read {
+  background-color: rgb(0, 162, 255);  
+}
+
+.update {
+    background-color: rgb(245, 192, 79);
+}
+
+.delete {
+    background-color: rgb(255, 136, 0);
+}
+
