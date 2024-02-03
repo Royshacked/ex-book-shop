@@ -36,3 +36,10 @@ function onUpdateBook(bookId) {
     updateBook(bookId,newPrice)
     render()
 }
+
+function onAddBook() {
+    const title = prompt('Please insert Book title')
+    const price = +prompt('Please insert Book price')
+    addBook(title,price) 
+    render()
+}
