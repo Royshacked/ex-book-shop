@@ -48,7 +48,7 @@ function onReadBook(bookId) {
     const elImg = elModal.querySelector('.book-cover') 
 
     const book = readBook(bookId)
-    const bookStr = `<img src="${book.imgUrl}" loading="eager"">`
+    const bookStr = `<img src="${book.imgUrl}" loading="eager">` //load img with opening of dialog
 
     elTxt.innerText = book.title
     elImg.innerHTML = bookStr
