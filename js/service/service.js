@@ -3,16 +3,20 @@
 var gBooks
 _createBooks()
 
+function getModel() {
+    return gBooks
+}
+
 function removeBook(id) {
     const idx = gBooks.findIndex(book => book.id === id)
     gBooks.splice(idx, 1)
     _saveBooks()
 }
 
-function updateBook(id, price,image) {
+function updateBook(id, price, image) {
     const book = gBooks.find(book => book.id === id)
-    if(price) book.price = price
-    if(image) book.imgUrl = image
+    if (price) book.price = price
+    if (image) book.imgUrl = 'img/' + image
     _saveBooks()
 }
 
@@ -24,7 +28,7 @@ function addBook(title, price, image) {
             id: makeId(),
             title: title,
             price: price,
-            imgUrl: image
+            imgUrl: 'img/' + image
         }
     )
     _saveBooks()
@@ -40,7 +44,7 @@ function _createBook(title, price, imgUrl) {
         id: makeId(),
         title: title,
         price: price,
-        imgUrl: imgUrl,
+        imgUrl: 'img/' + imgUrl,
     }
 }
 
@@ -48,9 +52,9 @@ function _createBooks() {
     gBooks = loadFromStorage('bookDB')
     if (!gBooks || gBooks.length === 0) {
         gBooks = [
-            _createBook('The adventures of Sherlock Holmes', 120, 'img/bg4j78.jpeg'),
-            _createBook('World Atlas', 300, 'img/bg4j79.jpeg'),
-            _createBook('Zorba the Greek', 120, 'img/bg4j80.jpeg')
+            _createBook('The adventures of Sherlock Holmes', 120, 'bg4j78.jpeg'),
+            _createBook('World Atlas', 300, 'bg4j79.jpeg'),
+            _createBook('Zorba the Greek', 120, 'bg4j80.jpeg')
         ]
         _saveBooks()
     }

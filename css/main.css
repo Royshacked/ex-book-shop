@@ -54,13 +54,14 @@ button  {
 
 dialog {
     position: relative;
+    min-width: 50vw;
 }
 
 .x-btn {
     position:absolute;
     top:0;
     right:0;
-    width:10%;
+    width: 5%;
     font-size: 1em;
 }
 
