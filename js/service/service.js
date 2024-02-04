@@ -13,14 +13,14 @@ function removeBook(id) {
     _saveBooks()
 }
 
-function updateBook(id, price, image) {
+function updateBook(id, price, imgUrl) {
     const book = gBooks.find(book => book.id === id)
     if (price) book.price = price
-    if (image) book.imgUrl = 'img/' + image
+    if (image) book.imgUrl = `img/${imgUrl}`
     _saveBooks()
 }
 
-function addBook(title, price, image) {
+function addBook(title, price, imgUrl) {
     if (!title || !price) return
 
     gBooks.unshift(
@@ -28,7 +28,7 @@ function addBook(title, price, image) {
             id: makeId(),
             title: title,
             price: price,
-            imgUrl: 'img/' + image
+            imgUrl: `img/${imgUrl}`
         }
     )
     _saveBooks()
@@ -44,7 +44,7 @@ function _createBook(title, price, imgUrl) {
         id: makeId(),
         title: title,
         price: price,
-        imgUrl: 'img/' + imgUrl,
+        imgUrl: `img/${imgUrl}`,
     }
 }
 
