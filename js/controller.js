@@ -33,14 +33,16 @@ function onRemoveBook(bookId) {
 
 function onUpdateBook(bookId) {
     const newPrice = +prompt('Please insert new price')
-    updateBook(bookId,newPrice)
+    const newImage = prompt('Please insert imgUrl')
+    updateBook(bookId,newPrice,newImage)
     render()
 }
 
 function onAddBook() {
     const title = prompt('Please insert Book title')
     const price = +prompt('Please insert Book price')
-    addBook(title,price) 
+    const image = prompt('please insert imgUrl')
+    addBook(title,price,image) 
     render()
 }
 
