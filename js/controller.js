@@ -52,7 +52,6 @@ function onReadBook(bookId) {
     const elImg = elModal.querySelector('.book-cover') 
 
     const book = readBook(bookId)
-    // const bookStr = JSON.stringify(book, null, 4)
     const bookStr = `<img src="${book.imgUrl}" loading="eager"">`
 
     elTxt.innerText = book.title
