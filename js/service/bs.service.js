@@ -5,19 +5,19 @@ const gBooks = [
         id: 'bg4J78',
         title: 'The adventures of Lori Ipsi',
         price: 120,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'img/bg4j78.jpeg'
     },
     {
         id: 'bg4J79',
         title: 'World Atlas',
         price: 300,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'img/bg4j79.jpeg'
     },
     {
         id: 'bg4J80',
         title: 'Zorba the Greek',
         price: 120,
-        imgUrl: 'lori-ipsi.jpg'
+        imgUrl: 'img/bg4j80.jpeg'
     }
 ]
 
