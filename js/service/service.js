@@ -9,13 +9,14 @@ function removeBook(id) {
     _saveBooks()
 }
 
-function updateBook(id, price) {
+function updateBook(id, price,image) {
     const book = gBooks.find(book => book.id === id)
-    book.price = price
+    if(price) book.price = price
+    if(image) book.imgUrl = image
     _saveBooks()
 }
 
-function addBook(title, price) {
+function addBook(title, price, image) {
     if (!title || !price) return
 
     gBooks.unshift(
@@ -23,7 +24,7 @@ function addBook(title, price) {
             id: makeId(),
             title: title,
             price: price,
-            imgUrl: 'lori-ipsi.jpg'
+            imgUrl: image
         }
     )
     _saveBooks()
