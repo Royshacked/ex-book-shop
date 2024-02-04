@@ -52,9 +52,9 @@ function _createBooks() {
     gBooks = loadFromStorage('bookDB')
     if (!gBooks || gBooks.length === 0) {
         gBooks = [
-            _createBook('The adventures of Sherlock Holmes', 120, 'bg4j78.jpeg'),
-            _createBook('World Atlas', 300, 'bg4j79.jpeg'),
-            _createBook('Zorba the Greek', 120, 'bg4j80.jpeg')
+            _createBook('The adventures of Sherlock Holmes', 120, 'sh.jpeg'),
+            _createBook('World Atlas', 300, 'wa.jpeg'),
+            _createBook('Zorba the Greek', 120, 'ztg.jpeg')
         ]
         _saveBooks()
     }
