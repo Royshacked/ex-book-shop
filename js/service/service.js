@@ -16,12 +16,12 @@ function removeBook(id) {
 function updateBook(id, price, imgUrl) {
     const book = gBooks.find(book => book.id === id)
     if (price) book.price = price
-    if (image) book.imgUrl = `img/${imgUrl}`
+    book.imgUrl = `img/${imgUrl}`
     _saveBooks()
 }
 
 function addBook(title, price, imgUrl) {
-    if (!title || !price) return
+    if (!title) return
 
     gBooks.unshift(
         {
