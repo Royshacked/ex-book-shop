@@ -47,13 +47,12 @@ function onAddBook() {
 function onReadBook(bookId) {
     const elModal = document.querySelector('.book-details')
     const elTxt = elModal.querySelector('h2 span')
-    const elImg = elModal.querySelector('.book-cover') 
+    const elImg = elModal.querySelector('.book-cover img') 
 
     const book = readBook(bookId)
-    const bookStr = `<img src="${book.imgUrl}" loading="eager">` //load img with opening of dialog
 
     elTxt.innerText = book.title
-    elImg.innerHTML = bookStr
+    elImg.src = book.imgUrl
 
     elModal.showModal()
 }

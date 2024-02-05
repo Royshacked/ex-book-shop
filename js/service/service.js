@@ -16,7 +16,7 @@ function removeBook(id) {
 function updateBook(id, price, imgUrl) {
     const book = gBooks.find(book => book.id === id)
     if (price) book.price = price
-    book.imgUrl = `img/${imgUrl}`
+    book.imgUrl = `img/${imgUrl}.jpeg`
     _saveBooks()
 }
 
@@ -28,7 +28,7 @@ function addBook(title, price, imgUrl) {
             id: makeId(),
             title: title,
             price: price,
-            imgUrl: `img/${imgUrl}`
+            imgUrl: `img/${imgUrl}.jpeg`
         }
     )
     _saveBooks()
@@ -39,12 +39,14 @@ function readBook(id) {
     return book
 }
 
+//private functions
+
 function _createBook(title, price, imgUrl) {
     return {
         id: makeId(),
         title: title,
         price: price,
-        imgUrl: `img/${imgUrl}`,
+        imgUrl: `img/${imgUrl}.jpeg`,
     }
 }
 
@@ -52,9 +54,9 @@ function _createBooks() {
     gBooks = loadFromStorage('bookDB')
     if (!gBooks || gBooks.length === 0) {
         gBooks = [
-            _createBook('The adventures of Sherlock Holmes', 120, 'sh.jpeg'),
-            _createBook('World Atlas', 300, 'wa.jpeg'),
-            _createBook('Zorba the Greek', 120, 'ztg.jpeg')
+            _createBook('The adventures of Sherlock Holmes', 120, 'sh'),
+            _createBook('World Atlas', 300, 'wa'),
+            _createBook('Zorba the Greek', 120, 'ztg')
         ]
         _saveBooks()
     }
