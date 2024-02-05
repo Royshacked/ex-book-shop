@@ -11,9 +11,11 @@ function render() {
             <td>${book.title}</td>
             <td>${book.price}</td>
             <td>
+                <div>
                 <button class="read" onclick = "onReadBook('${book.id}')">Read</button>
                 <button class="update" onclick = "onUpdateBook('${book.id}')">Update</button>
                 <button class="delete" onclick = "onRemoveBook('${book.id}')">Delete</button>
+                </div>
             </td>
         </tr>
     `).join('')
