@@ -10,10 +10,11 @@ function onInit() {
 
 function render() {
     const books = getBooks(gFilterBy)
-    var strHTML = `<tr><th>Title</th><th>Price</th><th>Actions</th></tr>` + books.map(book => `
+    var strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>` + books.map(book => `
         <tr>
             <td>${book.title}</td>
             <td>${book.price}</td>
+            <td>${book.rating}</td>
             <td>
                 <div>
                 <button class="read" onclick = "onReadBook('${book.id}')">Read</button>

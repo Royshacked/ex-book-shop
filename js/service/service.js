@@ -30,7 +30,8 @@ function addBook(title, price, imgUrl) {
             id: makeId(),
             title: title,
             price: price,
-            imgUrl: `img/${imgUrl}.jpeg`
+            imgUrl: `img/${imgUrl}.jpeg`,
+            rating: getRandomInt(1, 5)
         }
     )
     _saveBooks()
@@ -41,14 +42,15 @@ function readBook(id) {
     return book
 }
 
-//private functions
+//private functions///////////////////////////////////////////////////////
 
-function _createBook(title, price, imgUrl) {
+function _createBook(title, price, imgUrl , rating) {
     return {
         id: makeId(),
         title: title,
         price: price,
         imgUrl: `img/${imgUrl}.jpeg`,
+        rating: rating
     }
 }
 
@@ -56,9 +58,9 @@ function _createBooks() {
     gBooks = loadFromStorage('bookDB')
     if (!gBooks || gBooks.length === 0) {
         gBooks = [
-            _createBook('The adventures of Sherlock Holmes', 120, 'sh'),
-            _createBook('World Atlas', 300, 'wa'),
-            _createBook('Zorba the Greek', 120, 'ztg')
+            _createBook('The adventures of Sherlock Holmes', 120, 'sh', getRandomInt(1, 5)),
+            _createBook('World Atlas', 300, 'wa', getRandomInt(1, 5)),
+            _createBook('Zorba the Greek', 120, 'ztg', getRandomInt(1, 5))
         ]
         _saveBooks()
     }
