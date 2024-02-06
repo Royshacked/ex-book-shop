@@ -5,6 +5,7 @@ var gcloseModal
 
 function onInit() {
     render()
+    renderStats()
 }
 
 function render() {
@@ -26,30 +27,33 @@ function render() {
     document.querySelector('table').innerHTML = strHTML
 }
 
-function onRemoveBook(bookId,bookTitle) {
+function onRemoveBook(bookId, bookTitle) {
     removeBook(bookId)
     render()
-    onEventMsg(bookTitle,'removed')
+    renderStats()
+    onEventMsg(bookTitle, 'removed')
 }
 
-function onUpdateBook(bookId,bookTitle) {
+function onUpdateBook(bookId, bookTitle) {
     const newPrice = +prompt('Please insert new price')
     const newImage = prompt('Please insert imgUrl')
-    
+
     if (!newPrice && !newImage) return
     updateBook(bookId, newPrice, newImage)
     render()
-    onEventMsg(bookTitle,'updated')
+    renderStats()
+    onEventMsg(bookTitle, 'updated')
 }
 
 function onAddBook() {
     const title = prompt('Please insert Book title')
     const price = +prompt('Please insert Book price')
     const image = prompt('please insert imgUrl')
-    if (!title||!price) return
+    if (!title || !price) return
     addBook(title, price, image)
     render()
-    onEventMsg(title,'added')
+    renderStats()
+    onEventMsg(title, 'added')
 }
 
 function onReadBook(bookId) {
@@ -77,7 +81,7 @@ function onClearFilter() {
     render()
 }
 
-function onEventMsg(bookTitle,event) {
+function onEventMsg(bookTitle, event) {
     const elEventMsg = document.querySelector('.event-msg')
     const elTitle = document.querySelector('.event-msg h2')
 
@@ -89,3 +93,19 @@ function onEventMsg(bookTitle,event) {
         elEventMsg.close()
     }, 2000);
 }
+
+function renderStats() {
+    const books = getBooks(0)
+    const elTotal = document.querySelector('.total')
+    const elExpensive = document.querySelector('.expensive')
+    const elAvg = document.querySelector('.avg')
+    const elCheap = document.querySelector('.cheap')
+
+    const totalCount = books.length
+
+    elTotal.innerText = `Total: ${totalCount}`
+    elExpensive.innerText = `Expensive: ${_countExpensive(books)}`
+    elAvg.innerText = `Avg: ${_countAvg(books)}`
+    elCheap.innerText = `Cheap: ${_countCheap(books)}`
+}
+

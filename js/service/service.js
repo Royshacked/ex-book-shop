@@ -67,3 +67,24 @@ function _createBooks() {
 function _saveBooks() {
     saveToStorage('bookDB', gBooks)
 }
+
+function _countExpensive(books) {
+    return books.reduce((acc, book) => {
+        if (book.price >= 200) acc++
+        return acc
+    }, 0)
+}
+
+function _countAvg(books) {
+    return books.reduce((acc, book) => {
+        if (book.price > 80 && book.price < 200) acc++
+        return acc
+    }, 0)
+}
+
+function _countCheap(books) {
+    return books.reduce((acc, book) => {
+        if (book.price <= 80) acc++
+        return acc
+    }, 0)
+}
