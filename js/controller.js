@@ -61,11 +61,13 @@ function onReadBook(bookId) {
     const elModal = document.querySelector('.book-details')
     const elTxt = elModal.querySelector('h2 span')
     const elImg = elModal.querySelector('.book-cover img')
+    const elRate = document.querySelector('.rating')
 
     const book = readBook(bookId)
 
     elTxt.innerText = book.title
     elImg.src = book.imgUrl
+    elRate.innerText = book.rating
 
     elModal.showModal()
 }
