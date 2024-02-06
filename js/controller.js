@@ -1,11 +1,13 @@
 'use strict'
 
+var gFilterBy = ''
+
 function onInit() {
     render()
 }
 
 function render() {
-    const books = getModel()
+    const books = getBooks(gFilterBy)
     var strHTML = `<tr><th>Title</th><th>Price</th><th>Actions</th></tr>` + books.map(book => `
         <tr>
             <td>${book.title}</td>
@@ -20,8 +22,7 @@ function render() {
         </tr>
     `).join('')
 
-    const elTable = document.querySelector('table')
-    elTable.innerHTML = strHTML
+    document.querySelector('table').innerHTML = strHTML
 }
 
 function onRemoveBook(bookId) {
@@ -55,4 +56,16 @@ function onReadBook(bookId) {
     elImg.src = book.imgUrl
 
     elModal.showModal()
+}
+
+function onSetFilterBy(elFilterBy) {
+    gFilterBy = elFilterBy.value
+    render()
+}
+
+function onClearFilter() {
+    const elFilterBy = document.querySelector('.filter input')
+    elFilterBy.value = ''
+    gFilterBy = ''
+    render()
 }

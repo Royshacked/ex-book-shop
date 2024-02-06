@@ -7,9 +7,21 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body > button {
+.top-panel {
+    display: flex;
+    justify-content: space-between;
+
+    width: 50vw;
+    margin: 50px auto;
+    padding: 1em;
+    border:solid lightgray 2px;
+}
+
+.add-btn, .clear-btn {
     font-weight: bold;
 }
+
+
 
 table {
     margin:50px auto;

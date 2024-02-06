@@ -11,7 +11,15 @@
 <body onload="onInit()">
     <h1>The Book Shop</h1>
 
-    <button onclick="onAddBook()">Add a Book</button>
+    <section class = "top-panel">
+        <section class = "filter">
+            <input type="text" placeholder="Search..." oninput = "onSetFilterBy(this)">
+            <button class = "clear-btn" onclick = "onClearFilter()">Clear</button>
+        </section>
+
+        
+        <button class = "add-btn" onclick="onAddBook()">Add a Book</button>
+    </section>
 
     <table></table>
 
