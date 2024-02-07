@@ -42,9 +42,19 @@ function readBook(id) {
     return book
 }
 
+function getStats(books) {
+    return books.reduce((acc, book) => {
+        acc.total = books.length
+        if (book.price >= 200) acc.expensive++
+        if (book.price > 80 && book.price < 200) acc.avg++
+        if (book.price <= 80) acc.cheap++
+        return acc
+    }, { total: 0, cheap: 0, avg: 0, expensive: 0 })
+}
+
 //private functions///////////////////////////////////////////////////////
 
-function _createBook(title, price, imgUrl , rating) {
+function _createBook(title, price, imgUrl, rating) {
     return {
         id: makeId(),
         title: title,
@@ -70,23 +80,23 @@ function _saveBooks() {
     saveToStorage('bookDB', gBooks)
 }
 
-function _countExpensive(books) {
-    return books.reduce((acc, book) => {
-        if (book.price >= 200) acc++
-        return acc
-    }, 0)
-}
+// function countExpensive(books) {
+//     return books.reduce((acc, book) => {
+//         if (book.price >= 200) acc++
+//         return acc
+//     }, 0)
+// }
 
-function _countAvg(books) {
-    return books.reduce((acc, book) => {
-        if (book.price > 80 && book.price < 200) acc++
-        return acc
-    }, 0)
-}
+// function countAvg(books) {
+//     return books.reduce((acc, book) => {
+//         if (book.price > 80 && book.price < 200) acc++
+//         return acc
+//     }, 0)
+// }
 
-function _countCheap(books) {
-    return books.reduce((acc, book) => {
-        if (book.price <= 80) acc++
-        return acc
-    }, 0)
-}
+// function countCheap(books) {
+//     return books.reduce((acc, book) => {
+//         if (book.price <= 80) acc++
+//         return acc
+//     }, 0)
+// }

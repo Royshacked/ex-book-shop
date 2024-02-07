@@ -99,16 +99,15 @@ function onEventMsg(bookTitle, event) {
 
 function renderStats() {
     const books = getBooks(0)
+    const stats = getStats(books)
     const elTotal = document.querySelector('.total')
     const elExpensive = document.querySelector('.expensive')
     const elAvg = document.querySelector('.avg')
     const elCheap = document.querySelector('.cheap')
 
-    const totalCount = books.length
-
-    elTotal.innerText = `Total: ${totalCount}`
-    elExpensive.innerText = `Expensive: ${_countExpensive(books)}`
-    elAvg.innerText = `Avg: ${_countAvg(books)}`
-    elCheap.innerText = `Cheap: ${_countCheap(books)}`
+    elTotal.innerText = `Total: ${stats.total}`
+    elExpensive.innerText = `Expensive: ${stats.expensive}`
+    elAvg.innerText = `Avg: ${stats.avg}`
+    elCheap.innerText = `Cheap: ${stats.cheap}`
 }
 
