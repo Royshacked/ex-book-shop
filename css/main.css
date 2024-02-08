@@ -5,6 +5,9 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
     height: 100vh;
     margin: 0;
     text-align: center;
@@ -16,7 +19,7 @@ body {
     justify-content: space-between;
 
     width: 50vw;
-    margin: 50px auto;
+    /* margin: 50px auto; */
     padding: 1em;
     border:solid lightgray 2px;
 }
@@ -27,7 +30,7 @@ body {
 }
 
 table {
-    margin:50px auto;
+    /* margin:50px auto; */
     text-align: left;  
     width: 50vw; 
 }
@@ -97,13 +100,19 @@ div > button  {
 footer {
     display: flex;
     justify-content: space-between;
+    
 
     width: 50vw;
 
-    margin: auto;
+    /* margin: auto; */
     padding: 1em;
     border:solid lightgray 2px;
 
     font-weight: bold;
+}
+
+footer div {
+    padding: 1em;
+    border:solid lightgray 2px;
 }
 

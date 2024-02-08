@@ -9,24 +9,26 @@
 </head>
 
 <body onload="onInit()">
-    <h1>The Book Shop</h1>
+    <section>
+        <h1>The Book Shop</h1>
 
-    <section class = "top-panel">
-        <section class = "filter">
-            <input type="text" placeholder="Search..." oninput = "onSetFilterBy(this)">
-            <button class = "clear-btn" onclick = "onClearFilter()">Clear</button>
+        <section class="top-panel">
+            <section class="filter">
+                <input type="text" placeholder="Search..." oninput="onSetFilterBy(this)">
+                <button class="clear-btn" onclick="onClearFilter()">Clear</button>
+            </section>
+
+            <button class="add-btn" onclick="onAddBook()">Add a Book</button>
         </section>
-        
-        <button class = "add-btn" onclick="onAddBook()">Add a Book</button>
+
+        <table></table>
     </section>
-
-    <table></table>
-
+    
     <dialog class="book-details">
         <form method="dialog">
             <h2>Book: <span></span></h2>
             <span class="book-cover"><img src="" alt=""></span>
-            <h3>Book rating: <span class = "rating"></span></h3>
+            <h3>Book rating: <span class="rating"></span></h3>
             <button class="x-btn">x</button>
         </form>
     </dialog>
