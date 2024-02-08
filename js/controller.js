@@ -32,7 +32,7 @@ function onRemoveBook(bookId, bookTitle) {
     removeBook(bookId)
     render()
     renderStats()
-    onEventMsg(bookTitle, 'removed')
+    onUserMsg(bookTitle, 'removed')
 }
 
 function onUpdateBook(bookId, bookTitle) {
@@ -43,7 +43,7 @@ function onUpdateBook(bookId, bookTitle) {
     updateBook(bookId, newPrice, newImage)
     render()
     renderStats()
-    onEventMsg(bookTitle, 'updated')
+    onUserMsg(bookTitle, 'updated')
 }
 
 function onAddBook() {
@@ -54,7 +54,7 @@ function onAddBook() {
     addBook(title, price, image)
     render()
     renderStats()
-    onEventMsg(title, 'added')
+    onUserMsg(title, 'added')
 }
 
 function onReadBook(bookId) {
@@ -84,9 +84,9 @@ function onClearFilter() {
     render()
 }
 
-function onEventMsg(bookTitle, event) {
-    const elEventMsg = document.querySelector('.event-msg')
-    const elTitle = document.querySelector('.event-msg h3')
+function onUserMsg(bookTitle, event) {
+    const elEventMsg = document.querySelector('.user-msg')
+    const elTitle = document.querySelector('.user-msg h3')
 
     elTitle.innerText = `The book "${bookTitle}" has been ${event} succesfully!`
 
@@ -98,7 +98,7 @@ function onEventMsg(bookTitle, event) {
 }
 
 function renderStats() {
-    const books = getBooks(0)
+    const books = getBooks()
     const stats = getStats(books)
     const elTotal = document.querySelector('.total')
     const elExpensive = document.querySelector('.expensive')

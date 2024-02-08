@@ -9,42 +9,49 @@
 </head>
 
 <body onload="onInit()">
-    <section>
-        <h1>The Book Shop</h1>
+    <div class="book-shop">
+        <section>
+            <h1>The Book Shop</h1>
 
-        <fieldset class="top-panel">
-            <legend>Searching & Adding</legend>
-            <section class="filter">
-                <input type="text" placeholder="Search..." oninput="onSetFilterBy(this)">
-                <button class="clear-btn" onclick="onClearFilter()">Clear</button>
+            <section class="top-field">
+                <fieldset>
+                    <legend>Searching & Adding</legend>
+                    <section class="filter">
+                        <input type="text" placeholder="Search..." oninput="onSetFilterBy(this)">
+                        <button type="button" class="clear-btn" onclick="onClearFilter()">Clear</button>
+                    </section>
+
+                    <button class="add-btn" onclick="onAddBook()">Add a Book</button>
+                </fieldset>
             </section>
 
-            <button class="add-btn" onclick="onAddBook()">Add a Book</button>
-        </fieldset>
+            <table></table>
+        </section>
 
-        <table></table>
-    </section>
+        <dialog class="book-details">
+            <form method="dialog">
+                <h2>Book: <span></span></h2>
+                <span class="book-cover"><img src="" alt="" onerror = "this.src = 'img/default.jpeg'"></span>
+                <h3>Book rating: <span class="rating"></span></h3>
+                <button class="x-btn">x</button>
+            </form>
+        </dialog>
 
-    <dialog class="book-details">
-        <form method="dialog">
-            <h2>Book: <span></span></h2>
-            <span class="book-cover"><img src="" alt=""></span>
-            <h3>Book rating: <span class="rating"></span></h3>
-            <button class="x-btn">x</button>
-        </form>
-    </dialog>
+        <dialog class="user-msg">
+            <h3></h3>
+        </dialog>
 
-    <dialog class="event-msg">
-        <h3></h3>
-    </dialog>
+        <footer>
+            <fieldset class=" stats">
+                <legend>Stats</legend>
 
-    <footer>
-        <div class="total"></div>
-        <div class="expensive"></div>
-        <div class="avg"></div>
-        <div class="cheap"></div>
-    </footer>
-
+                <div class="total"></div>
+                <div class="expensive"></div>
+                <div class="avg"></div>
+                <div class="cheap"></div>
+            </fieldset>
+        </footer>
+    </div>
     <script src="js/service/utils.service.js"></script>
     <script src="js/service/storage.service.js"></script>
     <script src="js/service/service.js"></script>
