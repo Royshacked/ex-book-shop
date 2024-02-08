@@ -19,8 +19,8 @@ function removeBook(id) {
 
 function updateBook(id, price, imgUrl) {
     const book = gBooks.find(book => book.id === id)
-    book.price = price
-    book.imgUrl = `img/${imgUrl}.jpeg`
+    if(price) book.price = price
+    if(imgUrl) book.imgUrl = `img/${imgUrl}.jpeg`
     _saveBooks()
 }
 
@@ -79,24 +79,3 @@ function _createBooks() {
 function _saveBooks() {
     saveToStorage('bookDB', gBooks)
 }
-
-// function countExpensive(books) {
-//     return books.reduce((acc, book) => {
-//         if (book.price >= 200) acc++
-//         return acc
-//     }, 0)
-// }
-
-// function countAvg(books) {
-//     return books.reduce((acc, book) => {
-//         if (book.price > 80 && book.price < 200) acc++
-//         return acc
-//     }, 0)
-// }
-
-// function countCheap(books) {
-//     return books.reduce((acc, book) => {
-//         if (book.price <= 80) acc++
-//         return acc
-//     }, 0)
-// }
