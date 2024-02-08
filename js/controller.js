@@ -86,7 +86,7 @@ function onClearFilter() {
 
 function onEventMsg(bookTitle, event) {
     const elEventMsg = document.querySelector('.event-msg')
-    const elTitle = document.querySelector('.event-msg h2')
+    const elTitle = document.querySelector('.event-msg h3')
 
     elTitle.innerText = `The book "${bookTitle}" has been ${event} succesfully!`
 
