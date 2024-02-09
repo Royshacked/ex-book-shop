@@ -1,5 +1,11 @@
 'use strict'
 
+const gQueryOptions = {
+    filterBy: { title: '', rating: 0 },
+    sortBy: {},
+    page: { idx: 0, size: 4 }
+}
+
 var gFilterBy = ''
 var gcloseModal
 
@@ -16,7 +22,7 @@ function render() {
             <td>${book.price}</td>
             <td>${book.rating}</td>
             <td>
-                <div>
+                <div class = "actions">
                 <button class="read" onclick = "onReadBook('${book.id}')">Read</button>
                 <button class="update" onclick = "onUpdateBook('${book.id}','${book.title}')">Update</button>
                 <button class="delete" onclick = "onRemoveBook('${book.id}','${book.title}')">Delete</button>
@@ -61,12 +67,14 @@ function onReadBook(bookId) {
     const elModal = document.querySelector('.book-details')
     const elTxt = elModal.querySelector('h2 span')
     const elImg = elModal.querySelector('.book-cover img')
+    const elPrice = document.querySelector('.price')
     const elRate = document.querySelector('.rating')
 
     const book = readBook(bookId)
 
     elTxt.innerText = book.title
     elImg.src = book.imgUrl
+    elPrice.innerText = book.price
     elRate.innerText = book.rating
 
     elModal.showModal()
@@ -86,7 +94,7 @@ function onClearFilter() {
 
 function onUserMsg(bookTitle, event) {
     const elEventMsg = document.querySelector('.user-msg')
-    const elTitle = document.querySelector('.user-msg h3')
+    const elTitle = elEventMsg.querySelector('h3')
 
     elTitle.innerText = `The book "${bookTitle}" has been ${event} succesfully!`
 

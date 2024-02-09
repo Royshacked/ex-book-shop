@@ -13,25 +13,33 @@
         <section>
             <h1>The Book Shop</h1>
 
-            <section class="top-field">
-                <fieldset>
+            <section class="filter-container">
+                <fieldset class="filter-field">
                     <legend>Searching & Adding</legend>
-                    <section class="filter">
-                        <input type="text" placeholder="Search..." oninput="onSetFilterBy(this)">
-                        <button type="button" class="clear-btn" onclick="onClearFilter()">Clear</button>
-                    </section>
+                    <div class="filter">
+                        <div class="filter-inputs">
+                            <input type="text" placeholder="Search..." oninput="onSetFilterBy()">
+                            <label>
+                                <input type="range" min="1" max="5" value="3"
+                                    onchange="this.title=this.value;onSetFilterBy()" />
+                            </label>
+                        </div>
+
+                        <button class="clear-btn" onclick="onClearFilter()">Clear</button>
+                    </div>
 
                     <button class="add-btn" onclick="onAddBook()">Add a Book</button>
                 </fieldset>
             </section>
 
-            <table></table>
+            <table class ="books-container"></table>
         </section>
 
         <dialog class="book-details">
             <form method="dialog">
                 <h2>Book: <span></span></h2>
-                <span class="book-cover"><img src="" alt="" onerror = "this.src = 'img/default.jpeg'"></span>
+                <span class="book-cover"><img src="" alt="" onerror="this.src = 'img/default.jpeg'"></span>
+                <h3>Book price: <span class="price"></span></h3>
                 <h3>Book rating: <span class="rating"></span></h3>
                 <button class="x-btn">x</button>
             </form>
@@ -42,7 +50,7 @@
         </dialog>
 
         <footer>
-            <fieldset class=" stats">
+            <fieldset class="stats-field">
                 <legend>Stats</legend>
 
                 <div class="total"></div>
@@ -52,6 +60,7 @@
             </fieldset>
         </footer>
     </div>
+
     <script src="js/service/utils.service.js"></script>
     <script src="js/service/storage.service.js"></script>
     <script src="js/service/service.js"></script>
