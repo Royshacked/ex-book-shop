@@ -6,8 +6,8 @@ const gQueryOptions = {
     page: { idx: 0, size: 4 }
 }
 
-var gFilterBy = ''
 var gcloseModal
+var gBookId = ''
 
 function onInit() {
     render()
@@ -15,7 +15,8 @@ function onInit() {
 }
 
 function render() {
-    const books = getBooks(gFilterBy)
+    const books = getBooks(gQueryOptions)
+
     var strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>` + books.map(book => `
         <tr>
             <td>${book.title}</td>
@@ -38,39 +39,44 @@ function onRemoveBook(bookId, bookTitle) {
     removeBook(bookId)
     render()
     renderStats()
-    onUserMsg(bookTitle, 'removed')
+    onUserMsg('removed')
 }
 
-function onUpdateBook(bookId, bookTitle) {
-    const newPrice = +prompt('Please insert new price')
-    const newImage = prompt('Please insert imgUrl')
-
-    if (!newPrice && !newImage) return
-    updateBook(bookId, newPrice, newImage)
-    render()
-    renderStats()
-    onUserMsg(bookTitle, 'updated')
+function onUpdateBook(bookId) {
+    document.querySelector('.edit-book h2').innerText = 'Update book'
+    document.querySelector('.add-title').classList.add('hidden')
+    document.querySelector(".edit-book").showModal()
+    gBookId = bookId
 }
 
 function onAddBook() {
-    document.querySelector(".add-book").showModal()
+    document.querySelector('.edit-book h2').innerText = 'Add book'
+    document.querySelector('.add-title').classList.remove('hidden')
+    document.querySelector(".edit-book").showModal()
+    gBookId = ''
 }
 
-function onSaveBook(elForm) {
+function onSaveBook() {
     const title = document.querySelector('.add-title').value
     const price = document.querySelector('.add-price').value
     const rating = document.querySelector('.add-rating').value
     const imgUrl = document.querySelector('.add-imgurl').value
 
-    addBook(title,+price,+rating,imgUrl)
-    elForm.reset()
+    if(!gBookId) addBook(title, price, rating, imgUrl)
+    if(gBookId) updateBook(gBookId, price, rating, imgUrl)
+    onResetEditBook()
     render()
     renderStats()
-    onUserMsg(title, 'added')
+    onUserMsg('updated')
+}
+
+function onResetEditBook() {
+    document.querySelector('.edit-book form').reset()
 }
 
 function onCloseAddBook() {
-    document.querySelector(".add-book").close()
+    document.querySelector(".edit-book").close()
+    onResetEditBook()
 }
 
 function onReadBook(bookId) {
@@ -90,23 +96,33 @@ function onReadBook(bookId) {
     elModal.showModal()
 }
 
-function onSetFilterBy(elFilterBy) {
-    gFilterBy = elFilterBy.value
+function onSetFilterBy() {
+    const elTitle = document.querySelector('.filter-title').value
+    const elRating = document.querySelector('.filter-rating').value
+
+    gQueryOptions.filterBy.title = elTitle
+    gQueryOptions.filterBy.rating = elRating
+
+    renderStats()
     render()
 }
 
 function onClearFilter() {
-    const elFilterBy = document.querySelector('.filter input')
-    elFilterBy.value = ''
-    gFilterBy = ''
+    document.querySelector('.filter-title').value = ''
+    document.querySelector('.filter-rating').value = 1
+
+    gQueryOptions.filterBy.title = ''
+    gQueryOptions.filterBy.rating = 1
+
+    renderStats()
     render()
 }
 
-function onUserMsg(bookTitle, event) {
+function onUserMsg(event) {
     const elEventMsg = document.querySelector('.user-msg')
     const elTitle = elEventMsg.querySelector('p')
 
-    elTitle.innerText = `The book "${bookTitle}" has been ${event} succesfully!`
+    elTitle.innerText = `The book has been ${event} succesfully!`
 
     elEventMsg.showModal()
 
@@ -116,7 +132,7 @@ function onUserMsg(bookTitle, event) {
 }
 
 function renderStats() {
-    const books = getBooks()
+    const books = getBooks(gQueryOptions)
     const stats = getStats(books)
     const elTotal = document.querySelector('.total')
     const elExpensive = document.querySelector('.expensive')

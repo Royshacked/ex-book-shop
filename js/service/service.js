@@ -5,10 +5,13 @@ _createBooks()
 
 
 
-function getBooks(filterBy) {
-    if (!filterBy) return gBooks
-    var str = filterBy.toLowerCase()
-    const filteredBooks = gBooks.filter(book => book.title.toLowerCase().includes(str))
+function getBooks(options) {
+    const title = options.filterBy.title.toLowerCase()
+    const rating = options.filterBy.rating
+
+    var filteredBooks = gBooks.filter(book => book.title.toLowerCase().includes(title))
+    filteredBooks = filteredBooks.filter(book => book.rating >= rating)
+
     return filteredBooks
 }
 
@@ -18,11 +21,13 @@ function removeBook(id) {
     _saveBooks()
 }
 
-function updateBook(id, price, imgUrl) {
+function updateBook(id, price, rating, imgUrl) {
     const book = gBooks.find(book => book.id === id)
 
     if(price) book.price = price
+    if(rating) book.rating = rating
     if(imgUrl) book.imgUrl = `img/${imgUrl}.jpeg`
+
     _saveBooks()
 }
 

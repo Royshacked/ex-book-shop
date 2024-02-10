@@ -18,9 +18,9 @@
                     <legend>Searching & Adding</legend>
                     <div class="filter">
                         <div class="filter-inputs">
-                            <input type="text" placeholder="Search..." oninput="onSetFilterBy()">
+                            <input class = "filter-title" type="text" placeholder="Search..." oninput="onSetFilterBy()">
                             <label>
-                                <input type="range" min="1" max="5" value="3"
+                                <input class = "filter-rating" type="range" min="1" max="5" value="1"
                                     onchange="this.title=this.value;onSetFilterBy()" />
                             </label>
                         </div>
@@ -45,7 +45,7 @@
             </form>
         </dialog>
 
-        <dialog class="add-book">
+        <dialog class="edit-book">
             <form method="dialog" onsubmit="onSaveBook(this)">
                 <h2>Add book</h2>
                 <section class="add-inputs">

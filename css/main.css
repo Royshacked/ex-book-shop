@@ -152,3 +152,7 @@ footer {
     border:solid lightgray 2px;
 }
 
+.hidden { 
+    display: none;
+}
+
