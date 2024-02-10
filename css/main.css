@@ -3,11 +3,19 @@
 }
 
 body {
+    position: relative;
     margin: 0px;
 
     text-align: center;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;   
+    font-family: Arial, Helvetica, sans-serif; 
+
+    background-image: url("../img/books.jpeg");
+    background-repeat: no-repeat;
+    background-size:cover ;
+    z-index: auto;
+    
+     
 }
 
 .book-shop {
@@ -34,6 +42,7 @@ body {
     text-align: start;
     font-size: 1em;
     font-weight: bold;
+    background-color: rgb(233, 199, 156);
 }
 
 .filter {
@@ -53,6 +62,7 @@ body {
 }
 
 table {
+    position: relative;
     text-align: left;  
     width: 50vw; 
 }
@@ -79,6 +89,9 @@ tbody > :nth-child(odd){
     background-color: #e6deded8;
 }
 
+tbody > :nth-child(even) {
+    background-color: lightblue;
+}
 .actions > button  {
     display: inline-flex;
     justify-content: center;
@@ -150,23 +163,30 @@ footer {
 .stats-field {
     display: flex;
     justify-content: space-between;
+
+    background-color: rgb(233, 199, 156);
 }
 
 .stats-field div {
     padding: 1em;
     border:solid lightgray 2px;
+    background-color: rgb(240, 220, 193);
 }
 
 .user-msg {
     position: absolute;
     top:1%;
     right:1%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 10%;
     height: 5%;
     
-    font-size: 0.7em;
+    font-size: 0.8em;
     border-radius: 5px;
-    background-color: lightgray;
+    background-color: rgb(233, 199, 156);
 }
 
 .hidden { 
