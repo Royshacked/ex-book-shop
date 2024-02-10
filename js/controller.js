@@ -53,14 +53,24 @@ function onUpdateBook(bookId, bookTitle) {
 }
 
 function onAddBook() {
-    const title = prompt('Please insert Book title')
-    const price = +prompt('Please insert Book price')
-    const image = prompt('please insert imgUrl')
-    if (!title || !price) return
-    addBook(title, price, image)
+    document.querySelector(".add-book").showModal()
+}
+
+function onSaveBook(elForm) {
+    const title = document.querySelector('.add-title').value
+    const price = document.querySelector('.add-price').value
+    const rating = document.querySelector('.add-rating').value
+    const imgUrl = document.querySelector('.add-imgurl').value
+
+    addBook(title,+price,+rating,imgUrl)
+    elForm.reset()
     render()
     renderStats()
     onUserMsg(title, 'added')
+}
+
+function onCloseAddBook() {
+    document.querySelector(".add-book").close()
 }
 
 function onReadBook(bookId) {
@@ -94,7 +104,7 @@ function onClearFilter() {
 
 function onUserMsg(bookTitle, event) {
     const elEventMsg = document.querySelector('.user-msg')
-    const elTitle = elEventMsg.querySelector('h3')
+    const elTitle = elEventMsg.querySelector('p')
 
     elTitle.innerText = `The book "${bookTitle}" has been ${event} succesfully!`
 

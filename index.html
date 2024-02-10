@@ -32,7 +32,7 @@
                 </fieldset>
             </section>
 
-            <table class ="books-container"></table>
+            <table class="books-container"></table>
         </section>
 
         <dialog class="book-details">
@@ -45,8 +45,26 @@
             </form>
         </dialog>
 
+        <dialog class="add-book">
+            <form method="dialog" onsubmit="onSaveBook(this)">
+                <h2>Add book</h2>
+                <section class="add-inputs">
+                    <input class="add-title" type="text" placeholder="Title...">
+                    <input class="add-price" type="number" placeholder="Price...">
+                    <input class="add-rating" type="number" min="1" max="5" placeholder="Rate 1 to 5...">
+                    <input class="add-imgurl" type="text" placeholder="ImgName...">
+                </section>
+
+                <section class="add-buttons">
+                    <button>Save</button>
+                    <button type="button" onclick="onCloseAddBook()">Cancel</button>
+                </section>
+            </form>
+
+        </dialog>
+
         <dialog class="user-msg">
-            <h3></h3>
+            <p></p>
         </dialog>
 
         <footer>

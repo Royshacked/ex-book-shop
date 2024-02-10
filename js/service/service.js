@@ -31,14 +31,14 @@ function readBook(id) {
     return book
 }
 
-function addBook(title, price, imgUrl) {
+function addBook(title, price, rating, imgUrl) {
     gBooks.unshift(
         {
             id: makeId(),
             title: title,
             price: price,
             imgUrl: `img/${imgUrl}.jpeg`,
-            rating: getRandomInt(1, 5)
+            rating: rating||getRandomInt(1, 5)
         }
     )
     _saveBooks()
