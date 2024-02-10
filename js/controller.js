@@ -67,7 +67,7 @@ function onSaveBook() {
     onResetEditBook()
     render()
     renderStats()
-    onUserMsg('updated')
+    onUserMsg('edited')
 }
 
 function onResetEditBook() {
@@ -124,10 +124,10 @@ function onUserMsg(event) {
 
     elTitle.innerText = `The book has been ${event} succesfully!`
 
-    elEventMsg.showModal()
+    elEventMsg.classList.remove('hidden')
 
     gcloseModal = setTimeout(() => {
-        elEventMsg.close()
+        elEventMsg.classList.add('hidden')
     }, 2000);
 }
 
