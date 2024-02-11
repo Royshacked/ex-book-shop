@@ -44,23 +44,23 @@ function onRemoveBook(bookId, bookTitle) {
 
 function onUpdateBook(bookId) {
     document.querySelector('.edit-book h2').innerText = 'Update book'
-    document.querySelector('.add-title').classList.add('hidden')
+    document.querySelector('.edit-title').classList.add('hidden')
     document.querySelector(".edit-book").showModal()
     gBookId = bookId
 }
 
 function onAddBook() {
     document.querySelector('.edit-book h2').innerText = 'Add book'
-    document.querySelector('.add-title').classList.remove('hidden')
+    document.querySelector('.edit-title').classList.remove('hidden')
     document.querySelector(".edit-book").showModal()
     gBookId = ''
 }
 
 function onSaveBook() {
-    const title = document.querySelector('.add-title').value
-    const price = document.querySelector('.add-price').value
-    const rating = document.querySelector('.add-rating').value
-    const imgUrl = document.querySelector('.add-imgurl').value
+    const title = document.querySelector('.edit-title').value
+    const price = document.querySelector('.edit-price').value
+    const rating = document.querySelector('.edit-rating').value
+    const imgUrl = document.querySelector('.edit-imgurl').value
 
     if(!gBookId) addBook(title, price, rating, imgUrl)
     if(gBookId) updateBook(gBookId, price, rating, imgUrl)
