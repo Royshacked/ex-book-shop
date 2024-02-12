@@ -164,6 +164,7 @@ tbody> :nth-child(even) {
     background-color: rgb(255, 136, 0);
 }
 
+
 .book-details {
     position: relative;
     min-width: 50vw;
@@ -210,6 +211,10 @@ footer {
     justify-content: space-between;
 
     background-color: rgb(233, 199, 156);
+}
+
+.stats-field legend {
+    font-size: 2em;
 }
 
 .stats-field div {

@@ -10,18 +10,20 @@ var gcloseModal
 var gBookId = ''
 
 function onInit() {
-    render()
+    renderBooks()
     renderStats()
 }
 
-function render() {
+function renderBooks() {
     const books = getBooks(gQueryOptions)
 
-    var strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>` + books.map(book => `
+    if(!books.length) return renderEmptyTable()
+        
+    const strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>` + books.map(book => `
         <tr>
             <td>${book.title}</td>
             <td>${book.price}</td>
-            <td>${book.rating}</td>
+            <td> ${'*'.repeat(book.rating)}</td>
             <td>
                 <div class = "actions">
                 <button class="read" onclick = "onReadBook('${book.id}')">Read</button>
@@ -35,9 +37,22 @@ function render() {
     document.querySelector('table').innerHTML = strHTML
 }
 
-function onRemoveBook(bookId, bookTitle) {
+function renderEmptyTable() {
+    const strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>
+                    <tr>
+                    <td class = "no-matches" colspan = "4" >no matches...</td>
+                    </tr> 
+                    `
+    document.querySelector('table').innerHTML = strHTML
+
+    setTimeout(() => {
+        onClearFilter()
+    }, 2000);
+}
+
+function onRemoveBook(bookId) {
     removeBook(bookId)
-    render()
+    renderBooks()
     renderStats()
     onUserMsg('removed')
 }
@@ -57,17 +72,24 @@ function onAddBook() {
 }
 
 function onSaveBook() {
+    var userMsg 
     const title = document.querySelector('.edit-title').value
     const price = document.querySelector('.edit-price').value
     const rating = document.querySelector('.edit-rating').value
     const imgUrl = document.querySelector('.edit-imgurl').value
 
-    if(!gBookId) addBook(title, price, rating, imgUrl)
-    if(gBookId) updateBook(gBookId, price, rating, imgUrl)
-    onResetEditBook()
-    render()
+    if(!gBookId) {
+        addBook(title, price, rating, imgUrl)
+        userMsg = 'added'
+    }
+    if(gBookId) {
+        updateBook(gBookId, price, rating, imgUrl)
+        userMsg = 'updated'
+    }
+    renderBooks()
     renderStats()
-    onUserMsg('edited')
+    onResetEditBook()
+    onUserMsg(userMsg)
 }
 
 function onResetEditBook() {
@@ -91,7 +113,7 @@ function onReadBook(bookId) {
     elTxt.innerText = book.title
     elImg.src = book.imgUrl
     elPrice.innerText = book.price
-    elRate.innerText = book.rating
+    elRate.innerText = '*'.repeat(book.rating)
 
     elModal.showModal()
 }
@@ -104,7 +126,7 @@ function onSetFilterBy() {
     gQueryOptions.filterBy.rating = elRating
 
     renderStats()
-    render()
+    renderBooks()
 }
 
 function onSetSortBy() {
@@ -114,7 +136,7 @@ function onSetSortBy() {
     const dir = elDir.checked ? -1 : 1
     gQueryOptions.sortBy = {[sort] : dir}
 
-    render()
+    renderBooks()
 }
 
 function onClearFilter() {
@@ -125,7 +147,7 @@ function onClearFilter() {
     gQueryOptions.filterBy.rating = 1
 
     renderStats()
-    render()
+    renderBooks()
 }
 
 function onUserMsg(event) {
