@@ -8,14 +8,17 @@ body {
 
     text-align: center;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif; 
+    font-family: Arial, Helvetica, sans-serif;
 
-    background-image: url("../img/books.jpeg");
+    background-image: url("../img/books.jpg");
     background-repeat: no-repeat;
-    background-size:cover ;
-    z-index: auto;
-    
-     
+    background-size: cover;
+
+    z-index: -1;
+}
+
+h1 {
+    color: white;
 }
 
 .book-shop {
@@ -35,7 +38,7 @@ body {
 
 .filter-field {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
 
     width: 100%;
 
@@ -45,9 +48,13 @@ body {
     background-color: rgb(233, 199, 156);
 }
 
+legend {
+    color: white;
+}
+
 .filter {
     display: flex;
-    gap:10px;
+    gap: 10px;
 }
 
 .filter-inputs {
@@ -83,26 +90,30 @@ body {
     padding: 1em;
 }
 
-.add-btn, .clear-btn {
+.add-btn,
+.clear-btn {
     font-weight: bold;
     cursor: pointer;
     height: 50%;
 }
 
-.next-btn, .prev-btn {
+.next-btn,
+.prev-btn {
     font-weight: bold;
     cursor: pointer;
 }
 
 table {
     position: relative;
-    text-align: left;  
-    width: 50vw; 
+    text-align: left;
+    width: 50vw;
 }
 
-table, th, td {
-    border:solid lightgray 2px;
-    border-collapse: collapse;  
+table,
+th,
+td {
+    border: solid lightgray 2px;
+    border-collapse: collapse;
     padding: 5px;
 
     font-weight: bold;
@@ -112,21 +123,21 @@ th {
     background-color: rgb(187, 183, 183);
 }
 
-td > div {
+td>div {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
-tbody > :nth-child(odd){ 
+tbody> :nth-child(odd) {
     background-color: #e6deded8;
 }
 
-tbody > :nth-child(even) {
+tbody> :nth-child(even) {
     background-color: lightblue;
 }
 
-.actions > button  {
+.actions>button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -142,7 +153,7 @@ tbody > :nth-child(even) {
 }
 
 .read {
-  background-color: rgb(0, 162, 255);  
+    background-color: rgb(0, 162, 255);
 }
 
 .update {
@@ -159,30 +170,30 @@ tbody > :nth-child(even) {
 }
 
 .x-btn {
-    position:absolute;
-    top:0;
-    right:0;
+    position: absolute;
+    top: 0;
+    right: 0;
     width: 2em;
     font-size: 1em;
 }
 
 .edit-book {
-    width:25%;
+    width: 25%;
 }
 
 .edit-inputs {
-   display: flex; 
-   flex-direction: column;
-   gap: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 
-   width:50%;
+    width: 50%;
 }
 
 .edit-buttons {
     display: flex;
     justify-content: space-between;
 
-    margin:1em 0 0 ;
+    margin: 1em 0 0;
 }
 
 .edit-buttons button {
@@ -191,7 +202,7 @@ tbody > :nth-child(even) {
 
 footer {
     width: 100%;
-    padding: 1em; 
+    padding: 1em;
 }
 
 .stats-field {
@@ -203,27 +214,26 @@ footer {
 
 .stats-field div {
     padding: 1em;
-    border:solid lightgray 2px;
+    border: solid lightgray 2px;
     background-color: rgb(240, 220, 193);
 }
 
 .user-msg {
     position: absolute;
-    top:1%;
-    right:1%;
+    top: 1%;
+    right: 1%;
 
     display: flex;
     justify-content: center;
     align-items: center;
     width: 10%;
     height: 5%;
-    
+
     font-size: 0.8em;
     border-radius: 5px;
     background-color: rgb(233, 199, 156);
 }
 
-.hidden { 
+.hidden {
     display: none;
 }
-

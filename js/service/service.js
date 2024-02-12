@@ -21,6 +21,7 @@ function getBooks(options) {
     else if(options.sortBy.rating) {
         books.sort((book1,book2) => (book1.rating - book2.rating) * options.sortBy.rating)
     }
+    
     return books
 }
 
