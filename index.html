@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="sort">
-                        <select name="" id="">
+                        <select onchange="onSetSortBy()">
                             <option value="">Sort by:</option>
                             <option value="title">By title</option>
                             <option value="price">By price</option>
@@ -39,11 +39,11 @@
                         <div class="sort-dir">
                             <label for="">
                                 <span>Descending</span>
-                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" />
+                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" checked/>
                             </label>
                             <label for="">
                                 <span>Ascending</span>
-                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" />
+                                <input type="radio" name="dir" oninput="onSetSortBy()"/>
                             </label>
                         </div>
                     </div>

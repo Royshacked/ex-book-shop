@@ -9,10 +9,19 @@ function getBooks(options) {
     const title = options.filterBy.title.toLowerCase()
     const rating = options.filterBy.rating
 
-    var filteredBooks = gBooks.filter(book => book.title.toLowerCase().includes(title))
-    filteredBooks = filteredBooks.filter(book => book.rating >= rating)
+    var books = gBooks.filter(book => book.title.toLowerCase().includes(title) 
+    && book.rating >= rating)
 
-    return filteredBooks
+    if(options.sortBy.title) {
+        books.sort((book1,book2) => book1.title.localeCompare(book2.title) * options.sortBy.title)
+    }
+    else if(options.sortBy.price) {
+        books.sort((book1,book2) => (book1.price - book2.price) * options.sortBy.price)
+    }
+    else if(options.sortBy.rating) {
+        books.sort((book1,book2) => (book1.rating - book2.rating) * options.sortBy.rating)
+    }
+    return books
 }
 
 function removeBook(id) {

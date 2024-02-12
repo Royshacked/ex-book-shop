@@ -107,6 +107,16 @@ function onSetFilterBy() {
     render()
 }
 
+function onSetSortBy() {
+    const sort = document.querySelector('.sort select').value
+    const elDir = document.querySelector('.sort-desc')
+
+    const dir = elDir.checked ? -1 : 1
+    gQueryOptions.sortBy = {[sort] : dir}
+
+    render()
+}
+
 function onClearFilter() {
     document.querySelector('.filter-title').value = ''
     document.querySelector('.filter-rating').value = 1
