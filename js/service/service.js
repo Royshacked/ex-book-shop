@@ -6,11 +6,9 @@ _createBooks()
 
 
 function getBooks(options) {
-    const title = options.filterBy.title.toLowerCase()
-    const rating = options.filterBy.rating
+    
 
-    var books = gBooks.filter(book => book.title.toLowerCase().includes(title) 
-    && book.rating >= rating)
+    var books = _filterBooks(options.filterBy)
 
     if(options.sortBy.title) {
         books.sort((book1,book2) => book1.title.localeCompare(book2.title) * options.sortBy.title)
@@ -20,6 +18,11 @@ function getBooks(options) {
     }
     else if(options.sortBy.rating) {
         books.sort((book1,book2) => (book1.rating - book2.rating) * options.sortBy.rating)
+    }
+
+    if(options.page) {
+        const booksIdx = options.page.idx * options.page.size
+        books = books.slice(booksIdx, booksIdx + options.page.size)
     }
 
     return books
@@ -70,6 +73,10 @@ function getStats(books) {
     }, { total: 0, cheap: 0, avg: 0, expensive: 0 })
 }
 
+function getBooksCount(filterBy) {
+    return _filterBooks(filterBy).length
+}
+
 //private functions///////////////////////////////////////////////////////
 
 function _createBook(title, price, imgUrl, rating) {
@@ -92,6 +99,17 @@ function _createBooks() {
         ]
         _saveBooks()
     }
+}
+
+function _filterBooks(filterBy) {
+    const title = filterBy.title.toLowerCase()
+    const rating = filterBy.rating
+
+    var books = gBooks.filter(book => 
+        book.title.toLowerCase().includes(title) 
+        && book.rating >= rating)
+
+    return books
 }
 
 function _saveBooks() {

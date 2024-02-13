@@ -3,7 +3,7 @@
 const gQueryOptions = {
     filterBy: { title: '', rating: 0 },
     sortBy: {},
-    page: { idx: 0, size: 4 }
+    page: { idx: 0, size: 5 }
 }
 
 var gcloseModal
@@ -17,8 +17,8 @@ function onInit() {
 function renderBooks() {
     const books = getBooks(gQueryOptions)
 
-    if(!books.length) return renderEmptyTable()
-        
+    if (!books.length) return renderEmptyTable()
+
     const strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>` + books.map(book => `
         <tr>
             <td>${book.title}</td>
@@ -72,17 +72,17 @@ function onAddBook() {
 }
 
 function onSaveBook() {
-    var userMsg 
+    var userMsg
     const title = document.querySelector('.edit-title').value
     const price = document.querySelector('.edit-price').value
     const rating = document.querySelector('.edit-rating').value
     const imgUrl = document.querySelector('.edit-imgurl').value
 
-    if(!gBookId) {
+    if (!gBookId) {
         addBook(title, price, rating, imgUrl)
         userMsg = 'added'
     }
-    if(gBookId) {
+    if (gBookId) {
         updateBook(gBookId, price, rating, imgUrl)
         userMsg = 'updated'
     }
@@ -134,7 +134,7 @@ function onSetSortBy() {
     const elDir = document.querySelector('.sort-desc')
 
     const dir = elDir.checked ? -1 : 1
-    gQueryOptions.sortBy = {[sort] : dir}
+    gQueryOptions.sortBy = { [sort]: dir }
 
     renderBooks()
 }
@@ -147,6 +147,33 @@ function onClearFilter() {
     gQueryOptions.filterBy.rating = 1
 
     renderStats()
+    renderBooks()
+}
+
+function onNextPage() {
+    const booksCount = getBooksCount(gQueryOptions.filterBy)
+
+    if (booksCount > (gQueryOptions.page.idx + 1) * gQueryOptions.page.size) {
+        gQueryOptions.page.idx++
+    } else {
+        gQueryOptions.page.idx = 0
+    }
+
+    renderBooks()
+}
+
+function onPrevPage() {
+    const booksCount = getBooksCount(gQueryOptions.filterBy)
+    const lastPage = Math.ceil(booksCount/gQueryOptions.page.size) - 1
+
+
+    if (gQueryOptions.page.idx - 1 < 0) {
+        gQueryOptions.page.idx = lastPage
+    }
+    else {
+        gQueryOptions.page.idx--
+    }
+
     renderBooks()
 }
 
