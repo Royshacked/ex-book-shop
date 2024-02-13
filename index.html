@@ -39,23 +39,23 @@
                         <div class="sort-dir">
                             <label for="">
                                 <span>Descending</span>
-                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" checked/>
+                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" checked />
                             </label>
                             <label for="">
                                 <span>Ascending</span>
-                                <input type="radio" name="dir" oninput="onSetSortBy()"/>
+                                <input type="radio" name="dir" oninput="onSetSortBy()" />
                             </label>
                         </div>
                     </div>
-                    
+
                 </fieldset>
             </section>
 
             <section class="add-paging">
                 <button class="add-btn" onclick="onAddBook()">Add a Book</button>
                 <div>
-                    <button class="next-btn" onclick = "onNextPage()">Next Page</button>
-                    <button class="prev-btn" onclick = "onPrevPage()">Prev Page</button>
+                    <button class="next-btn" onclick="onNextPage()">Next Page</button>
+                    <button class="prev-btn" onclick="onPrevPage()">Prev Page</button>
                 </div>
             </section>
 
@@ -78,8 +78,14 @@
                 <section class="edit-inputs">
                     <input class="edit-title" type="text" placeholder="Title...">
                     <input class="edit-price" type="number" placeholder="Price...">
-                    <input class="edit-rating" type="number" min="1" max="5" placeholder="Rate 1 to 5...">
+                    <!-- <input class="edit-rating" type="number" min="1" max="5" placeholder="Rate 1 to 5..."> -->
                     <input class="edit-imgurl" type="text" placeholder="ImgName...">
+                    <section class ="edit-rating">
+                        <span>Rating:</span>
+                        <button class="minus-rate" type ="button" onclick="onChangeRating(-1)">-</button>
+                        <button class = "rating-value">1</button>
+                        <button class="plus-rate" type ="button" onclick="onChangeRating(1)">+</button>
+                    </section>
                 </section>
 
                 <section class="edit-buttons">

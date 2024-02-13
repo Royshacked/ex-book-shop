@@ -40,7 +40,7 @@ function renderBooks() {
 function renderEmptyTable() {
     const strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>
                     <tr>
-                    <td class = "no-matches" colspan = "4" >no matches...</td>
+                    <td class = "no-matches" colspan = "4" rowspan = "5" >No matching books were found...</td>
                     </tr> 
                     `
     document.querySelector('table').innerHTML = strHTML
@@ -58,24 +58,46 @@ function onRemoveBook(bookId) {
 }
 
 function onUpdateBook(bookId) {
+    const title = document.querySelector('.edit-title')
+    const price = document.querySelector('.edit-price')
+
     document.querySelector('.edit-book h2').innerText = 'Update book'
-    document.querySelector('.edit-title').classList.add('hidden')
+
+    title.classList.add('hidden')
+    title.removeAttribute('required')
+    price.removeAttribute('required')
+
     document.querySelector(".edit-book").showModal()
     gBookId = bookId
 }
 
 function onAddBook() {
+    const title = document.querySelector('.edit-title')
+    const price = document.querySelector('.edit-price')
+
     document.querySelector('.edit-book h2').innerText = 'Add book'
-    document.querySelector('.edit-title').classList.remove('hidden')
+
+    title.classList.remove('hidden')
+    title.setAttribute('required', '')
+    price.setAttribute('required', '')
+
     document.querySelector(".edit-book").showModal()
     gBookId = ''
+}
+
+function onChangeRating(operator) {
+    var rating = +document.querySelector('.rating-value').innerText
+    rating = rating + operator
+    if(rating>5) rating = 5
+    if(rating<1) rating = 1
+    document.querySelector('.rating-value').innerText = rating
 }
 
 function onSaveBook() {
     var userMsg
     const title = document.querySelector('.edit-title').value
     const price = document.querySelector('.edit-price').value
-    const rating = document.querySelector('.edit-rating').value
+    const rating = +document.querySelector('.rating-value').innerText
     const imgUrl = document.querySelector('.edit-imgurl').value
 
     if (!gBookId) {
@@ -94,6 +116,7 @@ function onSaveBook() {
 
 function onResetEditBook() {
     document.querySelector('.edit-book form').reset()
+    document.querySelector('.rating-value').innerText = 1
 }
 
 function onCloseAddBook() {
@@ -203,4 +226,5 @@ function renderStats() {
     elAvg.innerText = `Avg: ${stats.avg}`
     elCheap.innerText = `Cheap: ${stats.cheap}`
 }
+
 

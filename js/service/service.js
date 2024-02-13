@@ -7,6 +7,7 @@ _createBooks()
 
 function getBooks(options) {
     var books = _filterBooks(options.filterBy)
+    
     _sortBooks(books,options.sortBy)
     
     if(options.page) {

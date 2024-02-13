@@ -164,6 +164,13 @@ tbody> :nth-child(even) {
     background-color: rgb(255, 136, 0);
 }
 
+.no-matches {
+    text-align: center;
+    height: 20vh;
+    background-color: white;
+    color: lightgray;
+}
+
 
 .book-details {
     position: relative;
