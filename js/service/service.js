@@ -7,7 +7,6 @@ _createBooks()
 
 function getBooks(options) {
     var books = _filterBooks(options.filterBy)
-    
     _sortBooks(books,options.sortBy)
     
     if(options.page) {
@@ -52,9 +51,9 @@ function addBook(title, price, rating, imgUrl) {
     _saveBooks()
 }
 
-function getStats(books) {
-    return books.reduce((acc, book) => {
-        acc.total = books.length
+function getStats() {
+    return gBooks.reduce((acc, book) => {
+        acc.total = gBooks.length
         if (book.price >= 200) acc.expensive++
         if (book.price > 80 && book.price < 200) acc.avg++
         if (book.price <= 80) acc.cheap++

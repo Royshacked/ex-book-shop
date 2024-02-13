@@ -116,10 +116,10 @@ function onSaveBook() {
 
 function onResetEditBook() {
     document.querySelector('.edit-book form').reset()
-    document.querySelector('.rating-value').innerText = 1
+    document.querySelector('.rating-value').innerText = 0
 }
 
-function onCloseAddBook() {
+function onCloseEditBook() {
     document.querySelector(".edit-book").close()
     onResetEditBook()
 }
@@ -167,7 +167,7 @@ function onClearFilter() {
     document.querySelector('.filter-rating').value = 1
 
     gQueryOptions.filterBy.title = ''
-    gQueryOptions.filterBy.rating = 1
+    gQueryOptions.filterBy.rating = 0
 
     renderStats()
     renderBooks()
@@ -181,7 +181,6 @@ function onNextPage() {
     } else {
         gQueryOptions.page.idx = 0
     }
-
     renderBooks()
 }
 
@@ -189,14 +188,12 @@ function onPrevPage() {
     const booksCount = getBooksCount(gQueryOptions.filterBy)
     const lastPage = Math.ceil(booksCount/gQueryOptions.page.size) - 1
 
-
     if (gQueryOptions.page.idx - 1 < 0) {
         gQueryOptions.page.idx = lastPage
     }
     else {
         gQueryOptions.page.idx--
     }
-
     renderBooks()
 }
 
@@ -214,8 +211,7 @@ function onUserMsg(event) {
 }
 
 function renderStats() {
-    const books = getBooks(gQueryOptions)
-    const stats = getStats(books)
+    const stats = getStats()
     const elTotal = document.querySelector('.total')
     const elExpensive = document.querySelector('.expensive')
     const elAvg = document.querySelector('.avg')
