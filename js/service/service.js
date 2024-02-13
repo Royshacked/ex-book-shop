@@ -6,25 +6,13 @@ _createBooks()
 
 
 function getBooks(options) {
-    
-
     var books = _filterBooks(options.filterBy)
-
-    if(options.sortBy.title) {
-        books.sort((book1,book2) => book1.title.localeCompare(book2.title) * options.sortBy.title)
-    }
-    else if(options.sortBy.price) {
-        books.sort((book1,book2) => (book1.price - book2.price) * options.sortBy.price)
-    }
-    else if(options.sortBy.rating) {
-        books.sort((book1,book2) => (book1.rating - book2.rating) * options.sortBy.rating)
-    }
-
+    _sortBooks(books,options.sortBy)
+    
     if(options.page) {
         const booksIdx = options.page.idx * options.page.size
         books = books.slice(booksIdx, booksIdx + options.page.size)
-    }
-
+    } 
     return books
 }
 
@@ -111,6 +99,26 @@ function _filterBooks(filterBy) {
 
     return books
 }
+
+function _sortBooks(books,sortBy) {
+    if(sortBy.title) {
+        books.sort((book1,book2) => book1.title.localeCompare(book2.title) * sortBy.title)
+    }
+    else if(sortBy.price) {
+        books.sort((book1,book2) => (book1.price - book2.price) * sortBy.price)
+    }
+    else if(sortBy.rating) {
+        books.sort((book1,book2) => (book1.rating - book2.rating) * sortBy.rating)
+    }
+}
+
+// function _pagingBooks(books,page) {
+//     if(page) {
+//         const booksIdx = page.idx * page.size
+//         books = books.slice(booksIdx, booksIdx + page.size)} 
+
+// }
+
 
 function _saveBooks() {
     saveToStorage('bookDB', gBooks)
