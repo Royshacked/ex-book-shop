@@ -58,11 +58,13 @@ function onRemoveBook(bookId) {
 }
 
 function onUpdateBook(bookId) {
+    const book = getBookById(bookId)
     const title = document.querySelector('.edit-title')
     const price = document.querySelector('.edit-price')
 
     document.querySelector('.edit-book h2').innerText = 'Update book'
 
+    title.value = book.title
     title.removeAttribute('required')
     price.removeAttribute('required')
 

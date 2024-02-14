@@ -197,6 +197,10 @@ tbody> :nth-child(even) {
     width: 50%;
 }
 
+.edit-title {
+    font-weight: bold;
+}
+
 .edit-buttons {
     display: flex;
     justify-content: space-between;
