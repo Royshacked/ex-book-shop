@@ -45,9 +45,9 @@ function renderEmptyTable() {
                     `
     document.querySelector('table').innerHTML = strHTML
 
-    setTimeout(() => {
-        onClearFilter()
-    }, 2000);
+    // setTimeout(() => {
+    //     onClearFilter()
+    // }, 2000);
 }
 
 function onRemoveBook(bookId) {
@@ -218,7 +218,8 @@ function onUserMsg(event) {
 }
 
 function renderStats() {
-    const stats = getStats()
+    const books = getBooks(gQueryOptions)
+    const stats = getStats(gBooks)
     const elTotal = document.querySelector('.total')
     const elExpensive = document.querySelector('.expensive')
     const elAvg = document.querySelector('.avg')
