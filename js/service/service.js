@@ -22,9 +22,10 @@ function removeBook(id) {
     _saveBooks()
 }
 
-function updateBook(id, price, rating, imgUrl) {
+function updateBook(id, title, price, rating, imgUrl) {
     const book = gBooks.find(book => book.id === id)
 
+    if(title) book.title = title
     if(price) book.price = price
     if(rating) book.rating = rating
     if(imgUrl) book.imgUrl = `img/${imgUrl}.jpeg`

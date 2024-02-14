@@ -63,7 +63,6 @@ function onUpdateBook(bookId) {
 
     document.querySelector('.edit-book h2').innerText = 'Update book'
 
-    title.classList.add('hidden')
     title.removeAttribute('required')
     price.removeAttribute('required')
 
@@ -77,7 +76,6 @@ function onAddBook() {
 
     document.querySelector('.edit-book h2').innerText = 'Add book'
 
-    title.classList.remove('hidden')
     title.setAttribute('required', '')
     price.setAttribute('required', '')
 
@@ -87,9 +85,11 @@ function onAddBook() {
 
 function onChangeRating(operator) {
     var rating = +document.querySelector('.rating-value').innerText
+
     rating = rating + operator
     if(rating>5) rating = 5
     if(rating<1) rating = 1
+    
     document.querySelector('.rating-value').innerText = rating
 }
 
@@ -101,11 +101,12 @@ function onSaveBook() {
     const imgUrl = document.querySelector('.edit-imgurl').value
 
     if (!gBookId) {
+
         addBook(title, price, rating, imgUrl)
         userMsg = 'added'
     }
     if (gBookId) {
-        updateBook(gBookId, price, rating, imgUrl)
+        updateBook(gBookId, title, price, rating, imgUrl)
         userMsg = 'updated'
     }
     renderBooks()
