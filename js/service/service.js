@@ -13,12 +13,8 @@ function getBooks(options) {
         const booksIdx = options.page.idx * options.page.size
         books = books.slice(booksIdx, booksIdx + options.page.size)
     } 
-    return books
-}
 
-function getBookById (bookId) {
-    const book = gBooks.find(book => book.id === bookId)
-    return book
+    return books
 }
 
 function removeBook(id) {
@@ -71,6 +67,10 @@ function getBooksCount(filterBy) {
     return _filterBooks(filterBy).length
 }
 
+function getNumberOfPages(booksCount,size) {
+    return Math.ceil(booksCount/size) 
+}
+
 //private functions///////////////////////////////////////////////////////
 
 function _createBook(title, price, imgUrl, rating) {
@@ -102,7 +102,6 @@ function _filterBooks(filterBy) {
     var books = gBooks.filter(book => 
         book.title.toLowerCase().includes(title) 
         && book.rating >= rating)
-
     return books
 }
 
@@ -117,14 +116,6 @@ function _sortBooks(books,sortBy) {
         books.sort((book1,book2) => (book1.rating - book2.rating) * sortBy.rating)
     }
 }
-
-// function _pagingBooks(books,page) {
-//     if(page) {
-//         const booksIdx = page.idx * page.size
-//         books = books.slice(booksIdx, booksIdx + page.size)} 
-
-// }
-
 
 function _saveBooks() {
     saveToStorage('bookDB', gBooks)

@@ -10,6 +10,7 @@ var gcloseModal
 var gBookId = ''
 
 function onInit() {
+    onSetPage()
     renderBooks()
     renderStats()
 }
@@ -17,7 +18,11 @@ function onInit() {
 function renderBooks() {
     const books = getBooks(gQueryOptions)
 
-    if (!books.length) return renderEmptyTable()
+    if (!books.length) {
+        onSetPage()
+        renderEmptyTable()
+        return
+    }
 
     const strHTML = `<tr><th>Title</th> <th>Price</th> <th>Ratings</th> <th>Actions</th></tr>` + books.map(book => `
         <tr>
@@ -45,13 +50,14 @@ function renderEmptyTable() {
                     `
     document.querySelector('table').innerHTML = strHTML
 
-    // setTimeout(() => {
-    //     onClearFilter()
-    // }, 2000);
+    setTimeout(() => {
+        onClearFilter()
+    }, 2000);
 }
 
 function onRemoveBook(bookId) {
     removeBook(bookId)
+    onSetPage()
     renderBooks()
     renderStats()
     onUserMsg('removed')
@@ -89,8 +95,8 @@ function onChangeRating(operator) {
     var rating = +document.querySelector('.rating-value').innerText
 
     rating = rating + operator
-    if(rating>5) rating = 5
-    if(rating<1) rating = 1
+    if (rating > 5) rating = 5
+    if (rating < 1) rating = 1
 
     document.querySelector('.rating-value').innerText = rating
 }
@@ -103,7 +109,6 @@ function onSaveBook() {
     const imgUrl = document.querySelector('.edit-imgurl').value
 
     if (!gBookId) {
-
         addBook(title, price, rating, imgUrl)
         userMsg = 'added'
     }
@@ -111,6 +116,7 @@ function onSaveBook() {
         updateBook(gBookId, title, price, rating, imgUrl)
         userMsg = 'updated'
     }
+    onSetPage()
     renderBooks()
     renderStats()
     onResetEditBook()
@@ -151,8 +157,19 @@ function onSetFilterBy() {
     gQueryOptions.filterBy.title = elTitle
     gQueryOptions.filterBy.rating = elRating
 
-    renderStats()
+    onSetPage()
     renderBooks()
+    renderStats()
+}
+
+function onSetPage() {
+    const booksCount = getBooksCount(gQueryOptions.filterBy)
+    const numOfPages = getNumberOfPages(booksCount, gQueryOptions.page.size)
+
+    gQueryOptions.page.idx = 0
+    const currPage = !booksCount ? 0 : 1
+
+    document.querySelector('.page-number span').innerText = `${currPage} out of ${numOfPages}`
 }
 
 function onSetSortBy() {
@@ -162,6 +179,7 @@ function onSetSortBy() {
     const dir = elDir.checked ? -1 : 1
     gQueryOptions.sortBy = { [sort]: dir }
 
+    onSetPage()
     renderBooks()
 }
 
@@ -172,35 +190,28 @@ function onClearFilter() {
     gQueryOptions.filterBy.title = ''
     gQueryOptions.filterBy.rating = 0
 
-    renderStats()
+    onSetPage()
     renderBooks()
+    renderStats()
 }
 
 function onNextPage() {
     const booksCount = getBooksCount(gQueryOptions.filterBy)
+    const numOfPages = getNumberOfPages(booksCount, gQueryOptions.page.size)
 
-    if (booksCount > (gQueryOptions.page.idx + 1) * gQueryOptions.page.size) {
-        gQueryOptions.page.idx++
-    } else {
-        gQueryOptions.page.idx = 0
-    }
+    gQueryOptions.page.idx + 1 === numOfPages ? gQueryOptions.page.idx = 0 : gQueryOptions.page.idx++
 
-    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1}`
+    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1} out of ${numOfPages}`
     renderBooks()
 }
 
 function onPrevPage() {
     const booksCount = getBooksCount(gQueryOptions.filterBy)
-    const lastPage = Math.ceil(booksCount/gQueryOptions.page.size) - 1
+    const numOfPages = getNumberOfPages(booksCount, gQueryOptions.page.size)
 
-    if (gQueryOptions.page.idx - 1 < 0) {
-        gQueryOptions.page.idx = lastPage
-    }
-    else {
-        gQueryOptions.page.idx--
-    }
+    gQueryOptions.page.idx - 1 < 0 ? gQueryOptions.page.idx = numOfPages - 1 : gQueryOptions.page.idx--
 
-    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1}`
+    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1} out of ${numOfPages}`
     renderBooks()
 }
 
@@ -219,7 +230,7 @@ function onUserMsg(event) {
 
 function renderStats() {
     const books = getBooks(gQueryOptions)
-    const stats = getStats(gBooks)
+    const stats = getStats()
     const elTotal = document.querySelector('.total')
     const elExpensive = document.querySelector('.expensive')
     const elAvg = document.querySelector('.avg')

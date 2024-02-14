@@ -219,7 +219,7 @@ tbody> :nth-child(even) {
 
     text-align: left;
     padding: 0.5em;
-    width: 5em;
+    width: max-content;
 
     border: solid lightgray 2px;
     background-color: rgb(240, 220, 193);
