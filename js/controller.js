@@ -89,7 +89,7 @@ function onChangeRating(operator) {
     rating = rating + operator
     if(rating>5) rating = 5
     if(rating<1) rating = 1
-    
+
     document.querySelector('.rating-value').innerText = rating
 }
 
@@ -182,6 +182,8 @@ function onNextPage() {
     } else {
         gQueryOptions.page.idx = 0
     }
+
+    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1}`
     renderBooks()
 }
 
@@ -195,6 +197,8 @@ function onPrevPage() {
     else {
         gQueryOptions.page.idx--
     }
+
+    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1}`
     renderBooks()
 }
 

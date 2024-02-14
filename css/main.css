@@ -208,6 +208,20 @@ tbody> :nth-child(even) {
     font-weight: bold;
 }
 
+.page-number {
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+
+    text-align: left;
+    padding: 0.5em;
+    width: 5em;
+
+    border: solid lightgray 2px;
+    background-color: rgb(240, 220, 193);
+    color: black;
+}
+
 footer {
     width: 100%;
     padding: 1em;
