@@ -212,6 +212,10 @@ tbody> :nth-child(even) {
     font-weight: bold;
 }
 
+.edit-rating {
+    width:max-content;
+}
+
 .page-number {
     position: absolute;
     bottom: 15%;
