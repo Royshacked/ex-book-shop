@@ -1,6 +1,7 @@
 'use strict'
 
 var gBooks
+const BOOKS_DB = 'bookDB'
 _createBooks()
 
 
@@ -8,11 +9,9 @@ _createBooks()
 function getBooks(options) {
     var books = _filterBooks(options.filterBy)
     _sortBooks(books,options.sortBy)
-    
-    if(options.page) {
-        const booksIdx = options.page.idx * options.page.size
-        books = books.slice(booksIdx, booksIdx + options.page.size)
-    } 
+
+    const booksIdx = options.page.idx * options.page.size
+    books = books.slice(booksIdx, booksIdx + options.page.size)
 
     return books
 }
@@ -72,7 +71,8 @@ function getBooksCount(filterBy) {
     return _filterBooks(filterBy).length
 }
 
-function getNumberOfPages(booksCount,size) {
+function getNumberOfPages(filterBy,size) {
+    const booksCount = getBooksCount(filterBy)
     return Math.ceil(booksCount/size) 
 }
 
@@ -89,7 +89,7 @@ function _createBook(title, price, imgUrl, rating) {
 }
 
 function _createBooks() {
-    gBooks = loadFromStorage('bookDB')
+    gBooks = loadFromStorage(BOOKS_DB)
     if (!gBooks || gBooks.length === 0) {
         gBooks = [
             _createBook('The adventures of Sherlock Holmes', 120, 'sh', getRandomInt(1, 5)),
@@ -123,5 +123,5 @@ function _sortBooks(books,sortBy) {
 }
 
 function _saveBooks() {
-    saveToStorage('bookDB', gBooks)
+    saveToStorage(BOOKS_DB, gBooks)
 }

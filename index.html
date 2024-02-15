@@ -38,11 +38,11 @@
                         <div class="sort-dir">
                             <label for="">
                                 <span>Descending</span>
-                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" checked />
+                                <input class="sort-desc" type="radio" name="dir" oninput="onSetSortBy()" checked/>
                             </label>
                             <label for="">
                                 <span>Ascending</span>
-                                <input type="radio" name="dir" oninput="onSetSortBy()" />
+                                <input class = "sort-asc" type="radio" name="dir" oninput="onSetSortBy()" />
                             </label>
                         </div>
                     </div>
@@ -52,8 +52,8 @@
             <section class="add-paging">
                 <button class="add-btn" onclick="onAddBook()">Add a Book</button>
                 <div>
-                    <button class="next-btn" onclick="onNextPage()">Next Page</button>
-                    <button class="prev-btn" onclick="onPrevPage()">Prev Page</button>
+                    <button class="next-btn" onclick="onChangePage(1)">Next Page</button>
+                    <button class="prev-btn" onclick="onChangePage(-1)">Prev Page</button>
                 </div>
             </section>
 

@@ -10,16 +10,16 @@ var gcloseModal
 var gBookId = ''
 
 function onInit() {
-    onSetPage()
+    readQueryParams()
     renderBooks()
-    renderStats()
+    renderPageCount()
+    renderStats() 
 }
 
 function renderBooks() {
     const books = getBooks(gQueryOptions)
 
     if (!books.length) {
-        onSetPage()
         renderEmptyTable()
         return
     }
@@ -55,10 +55,17 @@ function renderEmptyTable() {
     }, 2000);
 }
 
+function renderPageCount() {
+    const currPage = gQueryOptions.page.idx + 1
+    const numOfPages = getNumberOfPages(gQueryOptions.filterBy,gQueryOptions.page.size) 
+
+    document.querySelector('.page-number span').innerText = `${currPage} of ${numOfPages}`
+}
+
 function onRemoveBook(bookId) {
     removeBook(bookId)
-    onSetPage()
     renderBooks()
+    renderPageCount()
     renderStats()
     onUserMsg('removed')
 }
@@ -116,8 +123,8 @@ function onSaveBook() {
         updateBook(gBookId, title, price, rating, imgUrl)
         userMsg = 'updated'
     }
-    onSetPage()
     renderBooks()
+    renderPageCount()
     renderStats()
     onResetEditBook()
     onUserMsg(userMsg)
@@ -157,29 +164,20 @@ function onSetFilterBy() {
     gQueryOptions.filterBy.title = elTitle
     gQueryOptions.filterBy.rating = elRating
 
-    onSetPage()
+    setQueryParams()
     renderBooks()
+    renderPageCount()
     renderStats()
-}
-
-function onSetPage() {
-    const booksCount = getBooksCount(gQueryOptions.filterBy)
-    const numOfPages = getNumberOfPages(booksCount, gQueryOptions.page.size)
-
-    gQueryOptions.page.idx = 0
-    const currPage = !booksCount ? 0 : 1
-
-    document.querySelector('.page-number span').innerText = `${currPage} out of ${numOfPages}`
 }
 
 function onSetSortBy() {
     const sort = document.querySelector('.sort select').value
-    const elDir = document.querySelector('.sort-desc')
+    const elDesc = document.querySelector('.sort-desc')
 
-    const dir = elDir.checked ? -1 : 1
+    const dir = elDesc.checked ? -1 : 1
     gQueryOptions.sortBy = { [sort]: dir }
 
-    onSetPage()
+    setQueryParams()
     renderBooks()
 }
 
@@ -190,28 +188,23 @@ function onClearFilter() {
     gQueryOptions.filterBy.title = ''
     gQueryOptions.filterBy.rating = 0
 
-    onSetPage()
+    setQueryParams()
     renderBooks()
+    renderPageCount()
     renderStats()
 }
 
-function onNextPage() {
-    const booksCount = getBooksCount(gQueryOptions.filterBy)
-    const numOfPages = getNumberOfPages(booksCount, gQueryOptions.page.size)
+function onChangePage(diff) {
+    const maxPageIdx = getNumberOfPages(gQueryOptions.filterBy,gQueryOptions.page.size) - 1
+    var nextPageIdx = gQueryOptions.page.idx += diff
 
-    gQueryOptions.page.idx + 1 === numOfPages ? gQueryOptions.page.idx = 0 : gQueryOptions.page.idx++
+    if(nextPageIdx > maxPageIdx) gQueryOptions.page.idx = 0
+    if(nextPageIdx < 0) gQueryOptions.page.idx = maxPageIdx
 
-    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1} out of ${numOfPages}`
-    renderBooks()
-}
+    nextPageIdx = gQueryOptions.page.idx
 
-function onPrevPage() {
-    const booksCount = getBooksCount(gQueryOptions.filterBy)
-    const numOfPages = getNumberOfPages(booksCount, gQueryOptions.page.size)
-
-    gQueryOptions.page.idx - 1 < 0 ? gQueryOptions.page.idx = numOfPages - 1 : gQueryOptions.page.idx--
-
-    document.querySelector('.page-number span').innerText = `${gQueryOptions.page.idx + 1} out of ${numOfPages}`
+    setQueryParams()
+    renderPageCount()
     renderBooks()
 }
 
@@ -240,6 +233,73 @@ function renderStats() {
     elExpensive.innerText = `Expensive: ${stats.expensive}`
     elAvg.innerText = `Avg: ${stats.avg}`
     elCheap.innerText = `Cheap: ${stats.cheap}`
+}
+
+//****************************************************************************************************************** */
+
+function setQueryParams() {
+    const queryParams = new URLSearchParams()
+
+    //filter
+    queryParams.set('title', gQueryOptions.filterBy.title)
+    queryParams.set('rating', gQueryOptions.filterBy.rating)
+
+    //sort
+    const sortKeys = Object.keys(gQueryOptions.sortBy)
+    if (sortKeys.length) {
+        queryParams.set('sortBy', sortKeys[0])
+        queryParams.set('sortDir', gQueryOptions.sortBy[sortKeys[0]])
+    }
+
+    //page
+    queryParams.set('pageIdx', gQueryOptions.page.idx)
+    queryParams.set('pageSize', gQueryOptions.page.size)
+
+    const newUrl =
+        window.location.protocol + "//" +
+        window.location.host +
+        window.location.pathname + '?' + queryParams.toString()
+
+    window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+function readQueryParams() {
+    const queryParams = new URLSearchParams(window.location.search)
+
+    //filter
+    gQueryOptions.filterBy = {
+        title: queryParams.get('title') || '',
+        rating: +queryParams.get('rating') || 0,
+    }
+
+    //sort
+    if (queryParams.get('sortBy')) {
+        const prop = queryParams.get('sortBy')
+        const dir = queryParams.get('sortDir')
+        gQueryOptions.sortBy[prop] = dir
+    }
+
+    //page
+    if (queryParams.get('pageIdx')) {
+        gQueryOptions.page.idx = +queryParams.get('pageIdx')
+        gQueryOptions.page.size = +queryParams.get('pageSize')
+    }
+    renderQueryParams()
+}
+
+function renderQueryParams() {
+    //filter
+    document.querySelector('.filter-title').value = gQueryOptions.filterBy.title
+    document.querySelector('.filter-rating').value = gQueryOptions.filterBy.rating
+
+    //sort
+    const sortKeys = Object.keys(gQueryOptions.sortBy)
+    const sortBy = sortKeys[0]
+    const dir = gQueryOptions[sortBy]
+
+    const sortType = (dir === -1) ? 'sort-desc' : 'sort-asc'
+    document.querySelector('.sort select').value = sortBy || ''
+    document.querySelector(`.${sortType}`).checked = true
 }
 
 
