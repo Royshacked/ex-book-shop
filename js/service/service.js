@@ -8,11 +8,9 @@ _createBooks()
 function getBooks(options) {
     var books = _filterBooks(options.filterBy)
     _sortBooks(books,options.sortBy)
-    
-    if(options.page) {
-        const booksIdx = options.page.idx * options.page.size
-        books = books.slice(booksIdx, booksIdx + options.page.size)
-    } 
+
+    const booksIdx = options.page.idx * options.page.size
+    books = books.slice(booksIdx, booksIdx + options.page.size)
 
     return books
 }
@@ -72,7 +70,8 @@ function getBooksCount(filterBy) {
     return _filterBooks(filterBy).length
 }
 
-function getNumberOfPages(booksCount,size) {
+function getNumberOfPages(filterBy,size) {
+    const booksCount = getBooksCount(filterBy)
     return Math.ceil(booksCount/size) 
 }
 
