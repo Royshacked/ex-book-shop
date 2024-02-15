@@ -173,6 +173,7 @@ function onSetFilterBy() {
 function onSetSortBy() {
     const sort = document.querySelector('.sort select').value
     const elDesc = document.querySelector('.sort-desc')
+    const elAsc = document.querySelector('.sort-asc')
 
     const dir = elDesc.checked ? -1 : 1
     gQueryOptions.sortBy = { [sort]: dir }
