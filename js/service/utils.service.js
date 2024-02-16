@@ -16,25 +16,25 @@ function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)
 }
 
+function pipe(...functions) {
+	return function (initialValue) {
+		return functions.reduce((result, f) => f(result), initialValue)
+	}
+}
 
-// function f (x) {
-//     return x + 2
-// }
+function f (x) {
+    return x + 2
+}
 
-// function g (y) {
-//     return y * 2
-// }
+function g (y) {
+    return y * 2
+}
 
-// function h(x) {
-//     return x * 5
-// }
+function h(x) {
+    return x * 5
+}
 
-// const result = f(g(3))
+const functionsComposition = pipe(f,g,h)
+const result = functionsComposition(2);
+console.log('result', result);
 
-// function pipe(functions) {
-//     const first = functions[0]()
-//     const [el,rest] = functions
-//     return rest.reduce((result, f) => f(result), first)
-// }
-
-// const newResult = pipe([f,g])

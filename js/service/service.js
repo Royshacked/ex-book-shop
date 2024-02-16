@@ -8,6 +8,7 @@ _createBooks()
 
 function getBooks(options) {
     var books = _filterBooks(options.filterBy)
+    console.log(books)
     _sortBooks(books,options.sortBy)
 
     const booksIdx = options.page.idx * options.page.size
