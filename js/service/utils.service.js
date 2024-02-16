@@ -15,3 +15,26 @@ function getRandomInt(min, max) {
 	const maxFloored = Math.floor(max)
 	return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled)
 }
+
+
+// function f (x) {
+//     return x + 2
+// }
+
+// function g (y) {
+//     return y * 2
+// }
+
+// function h(x) {
+//     return x * 5
+// }
+
+// const result = f(g(3))
+
+// function pipe(functions) {
+//     const first = functions[0]()
+//     const [el,rest] = functions
+//     return rest.reduce((result, f) => f(result), first)
+// }
+
+// const newResult = pipe([f,g])
