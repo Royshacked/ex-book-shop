@@ -164,6 +164,7 @@ function onSetFilterBy() {
     gQueryOptions.filterBy.title = elTitle
     gQueryOptions.filterBy.rating = elRating
 
+    restePage()
     setQueryParams()
     renderBooks()
     renderPageCount()
@@ -178,8 +179,10 @@ function onSetSortBy() {
     const dir = elDesc.checked ? -1 : 1
     gQueryOptions.sortBy = { [sort]: dir }
 
+    restePage()
     setQueryParams()
     renderBooks()
+    renderPageCount()
 }
 
 function onClearFilter() {
@@ -207,6 +210,10 @@ function onChangePage(diff) {
     setQueryParams()
     renderPageCount()
     renderBooks()
+}
+
+function restePage() {
+    return gQueryOptions.page.idx = 0
 }
 
 function onUserMsg(event) {
